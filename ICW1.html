@@ -15,7 +15,7 @@
         <h1> {{sitename}} </h1>
       </header>
       <main>
-        <block id="home" v-if="showClasslists">
+        <section id="home" v-if="showClasslists">
           
           <button v-if = "removeFromCart" id=button v-on:click= "displayCheckout" > 
             {{cartItemCount}} Checkout
@@ -23,7 +23,7 @@
           <button  disabled="disabled" v-else> {{cartItemCount}}
         </button>
 
-        <block2>
+        <section>
             <div id="order">
                 <div v-for="(value, key) in order_dict">
                     <input type="radio" name="order" value="key" v-if="value.checked" checked v-on:click="order(key)">
@@ -37,7 +37,7 @@
                     <label for="sort">{{key}}</label>
                 </div>
             </div>
-            <block3>
+            <section>
                 <div id="search">
                     <input type="text" placeholder="search" v-if="search" v-model="searchInput" v-on>
                     <button v-on:click="search"><i class='bx bx-search'></i></button>
@@ -53,10 +53,10 @@
                         <button v-else disabled>Add To Cart</button>
                     </div>
                 </div>
-            </block3> 
-        </block2>
-        </block>
-        <details id="details_page" v-else>
+            </section> 
+        </section>
+        </section>
+        <section id="details_page" v-else>
             <!--cart detils after order-->
             <div>
                 <h2>cart</h2>
@@ -94,7 +94,7 @@
                 <p> Phone Number: {{U_pick.tel}}</p>
             </div>  
             </div>
-        </details>
+        </section>
       </main>
     </div>
     </body>
@@ -141,7 +141,7 @@
             remove_from_cart(cart_lesson){
                 for (let i = 0; i < classlists.length; i++) {
                     const lesson = classlists[i]
-                    if(lesson.id == cart_lesson.id){
+                    if(lesson.id == cart_lesson.lesson.id){
                         lesson.spaces++
                     }
                 }
@@ -225,7 +225,7 @@
             sort_value:"All",
             sort_dict:{
                 "All":{id:1,checked:true},
-                "Subject":{id:2,checked:false},
+                "Lesson":{id:2,checked:false},
                 "Location":{id:3,checked:false},
                 "Price":{id:4,checked:false}
             },
