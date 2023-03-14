@@ -4,157 +4,243 @@
         <meta charsert="UTF-8"></meta>
         <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        
         <title>After School Classes</title>
         <script src= "https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+        <link rel="stylesheet" href="style.css">
     </head>
     
     <body>
-        <div id="app">
-            <!--mounting application-->
-            <main>
-              <div>
-                <h1 id="cartItem">
-                  Cart Items: <em class="w-text">{{picked.length}}</em>
-                </h1>
-                <!--Defining the picked slots. {{picked.length}} will display the slots available-->
-      
-                <div class="moduleBox">
-                    <figure>
-                        <img :src="products.image" />
-                        <!--binding the attribute(image) to the element (image in el). sourcing the image for it to be displayed on the page-->
-                      </figure>
-                <div class = "products">
-                  <div class="product" v-for="item in sorted">
-                    <p>Title: {{item.title}}</p>
-                    <p>Desciption: {{item.description}}</p>
-                    <p>Price: {{item.price}}</p>
-                    <p>Avalaible Inventory: {{item.avalaibleInventory}}</p>
-                    <button v-if="addtocart" id="button" v-on:click="addToCart">
-                      Add To Cart
-                    </button>
-                    <button disabled="disabled" v-else>Add to Cart</button>
-                  </div>
-                </div>
-                </div>
-              </div>
-            </main>
-          </div>
-        </body>
-        <script>
-            let products = [
-            {
-      "id": 1001,
-     "title": "Mathematics",
-     "description": "Provides additional support and instruction to help children develop a strong foundation in math concepts, problem-solving, and analytical skills.",
-     "price": 500,
-     "image": "img/math.jpg",
-     "availableInventory": 5,
-     "rating": 5,
- },
- {
-     "id": 1002,
-     "title": "Art",
-     "description": "Encourages creativity and imagination through painting, drawing, and crafting.",
-     "price": 300,
-     "image": "img/Art.jpg",
-     "availableInventory": 5,
-     "rating": 5,
- },
- {
-     "id": 1003,
-     "title": "Music",
-     "description": "Introduces children to music theory, instruments, and singing to improve their musical abilities.",
-     "price": 300,
-     "image": "img/music.jpg",
-     "availableInventory": 5,
-     "rating": 5,
- },
- {
-     "id": 1004,
-     "title": "Sports Clubs",
-     "description": "Gucci Cat Leash",
-     "price": 300,
-     "image": "img/sport.png",
-     "availableInventory": 5,
-     "rating": 4,
- },
- {
-    "id": 1005,
-    "title": "Coding",
-    "description": "Teaches kids the basics of coding and computer programming, preparing them for future technology-related careers.",
-    "price": 500,
-    "image": "img/coding.jpg",
-    "availableInventory": 5,
-    "rating": 5,
-},
-{
-    "id": 1006,
-    "title": "Language Classes",
-    "description": "Learn a new language such as Spanish, French, or Mandarin through interactive lessons and activities.",
-    "price": 350,
-    "image": "img/language.jpg",
-    "availableInventory": 5,
-    "rating": 5,
-},
-{
-    "id": 1007,
-    "title": "Drama",
-    "description": "Build confidence and acting skills through improvisation, scene work, and theatre games.",
-    "price": 350,
-    "image": "img/drama.jpg",
-    "availableInventory": 5,
-    "rating": 3,
-},
-{
-    "id": 1008,
-    "title": "Cooking lessons",
-    "description": "Explore the culinary world by learning how to prepare and cook delicious and healthy meals.",
-    "price": 300,
-    "image": "img/cooking.jpg",
-    "availableInventory": 5,
-    "rating": 4,
-},
-{
-    "id": 1009,
-    "title": "Science",
-    "description": "Conduct experiments and explore scientific concepts through hands-on activities and projects.",
-    "price": 400,
-    "image": "img/science.jpg",
-    "availableInventory": 5,
-    "rating": 5,
-},
-{
-    "id": 1010,
-    "title": "Robotics",
-    "description": "uild and program robots using LEGO kits to explore engineering and technology concepts.",
-    "price": 500,
-    "image": "img/robotics.jpg",
-    "availableInventory": 5,
-    "rating": 5,
-} 
+    <div id="app">
+      <header>
+        <h1> {{sitename}} </h1>
+      </header>
+      <main>
+        <block id="home" v-if="showClasslists">
+          
+          <button v-if = "removeFromCart" id=button v-on:click= "displayCheckout" > 
+            {{cartItemCount}} Checkout
+          </button>
+          <button  disabled="disabled" v-else> {{cartItemCount}}
+        </button>
 
-            ]
-          const app = new Vue({
-            //initializing the vue instance
-      
-            el: "#app",
-            methods: {
-              AddTocart() {
-                this.picked.push(this.module.id);
-              },
+        <block2>
+            <div id="order">
+                <div v-for="(value, key) in order_dict">
+                    <input type="radio" name="order" value="key" v-if="value.checked" checked v-on:click="order(key)">
+                    <input type="radio" name="order" value="key" v-else v-on:click="order(key)">
+                    <label for="order">{{key}}</label>
+            </div> 
+            <div id="sort">
+                <div v-for="(value, key) in sort_dict">
+                    <input type="radio" name="sort" value="key" v-if="value.checked" checked v-on:click="sort(key)">
+                    <input type="radio" name="sort" value="key" v-else v-on:click="sort(key)">
+                    <label for="sort">{{key}}</label>
+                </div>
+            </div>
+            <block3>
+                <div id="search">
+                    <input type="text" placeholder="search" v-if="search" v-model="searchInput" v-on>
+                    <button v-on:click="search"><i class='bx bx-search'></i></button>
+                </div>
+                <div id="classlists">
+                    <div class="classlist" v-for="lesson in classlist_copy">
+                        <p>Lesson: {{lesson.title}}</p>
+                        <p>Description: {{lesson.description}}</p>
+                        <p>Location: {{lesson.location}}</p>
+                        <p>Price: {{lesson.price}}</p>
+                        <p>AvailableSpace: {{lesson.availableInventory}}</p>
+                        <button v-if="lesson.availableInventory > 0" v-on:click="add_to_cart(lesson)">Add To Cart</button>
+                        <button v-else disabled>Add To Cart</button>
+                    </div>
+                </div>
+            </block3> 
+        </block2>
+        </block>
+        <details id="details_page" v-else>
+            <!--cart detils after order-->
+            <div>
+                <h2>cart</h2>
+                <div id="classlists">
+                    <div class="classlist" v-for="lesson in cart">
+                        <p>Lesson: {{lesson.lesson.title}} </p>
+                        <p>Location: {{lesson.lesson.location}}</p>
+                        <p>Price: {{lesson.lesson.price}}</p>
+                        <button v-on:click="remove_from_cart(lesson)"> Remove from cart</button>
+                    </div>
+                </div>
+            </div>
+            <!--user details: name, surname and phone number-->
+            <div id="details">
+                <h2>Checkout</h2>
+                <button v-on:click="displayCheckout">Back</button>
+                <p>
+                    <strong>Surname:</strong>
+                    <input v-model.trim="U_pick.surname" type="text">
+                </p>
+                <p>
+                    <strong>Name:</strong>
+                    <input v-model.trim="U_pick.name" type="text">
+                </p>
+                <div>
+                <p>
+                    <strong>Phone Number:</strong>
+                    <input v-model.number="U_pick.tel" type="number">
+                </p>
+                </div>
+            <div>
+                <h2>User Lesson Selection</h2>
+                <p> Surname: {{U_pick.surname}} </p>
+                <p> Name: {{U_pick.name}}</p>
+                <p> Phone Number: {{U_pick.tel}}</p>
+            </div>  
+            </div>
+        </details>
+      </main>
+    </div>
+    </body>
+      <script src="classlists.js"></script>
+<script>
+    const webstore = new Vue({
+        el:"#app",
+        computed:{
+            cartItemCount(){
+                return this.cart.length || "Nothing Selected";
             },
-            computed: {
-              //function to check if user can still pick modules
-              canPick() {
-                return this.picked.length < this.module.availableSpaces; //returns true if they're still available spaces in the module
-              },
-              //function that returns the number of available modules
-              numAvailableMod() {
-                return this.module.availableSpaces - this.picked.length;
-              },
+            addToCart(){
+                return this.classlist.availableInventory > this.cart.length
             },
-          });
-        </script>
+            removeFromCart(){
+                return this.cart.length > 0
+            },
+            search(){
+                this.search_N(this.searchInput)
+                return true
+            }
+        },
+        methods:{
+            
+            displayCheckout(){
+                this.showClasslists = this.showClasslists ? false : true
+            },
+            add_to_cart(lesson){
+                for (let i = 0; i < classlists.length; i++) {
+                    const classlist= classlists[i]
+                    if(lesson.id == classlist.id){
+                        lesson.spaces--
+                    }
+                }
+                
+                const id = `${lesson.title[0]}`+lesson.id+`${lesson.location[0]}`+Mathematics.ceil(Mathematics.random()*1000000)
+                let data = {
+                    "id": id,
+                    "lesson":lesson,
+                }
+
+                this.cart.push(data)
+            },
+            remove_from_cart(cart_lesson){
+                for (let i = 0; i < classlists.length; i++) {
+                    const lesson = classlists[i]
+                    if(lesson.id == cart_lesson.id){
+                        lesson.spaces++
+                    }
+                }
+                for(let i = 0; i < this.cart.length; i++){
+                    const lesson = this.cart[i]
+                    if(cart_lesson.id == lesson.id){
+                        this.cart.splice(i,1)
+                        break;
+                    }
+                }
+                
+            },
+          
+            order(value){
+                this.order_value = value
+                this.order_sort(this.sort_value)
+            },
+            sort(value){
+                this.sort_value = value
+                this.order_sort(value)
+            },
+            order_sort(criteria){
+                criteria = criteria.toLowerCase()
+                if(criteria != "all"){
+                    if(this.order_value == "Ascending"){
+
+                        this.classlist_copy.sort((a,b)=>{
+                            if(a[criteria] > b[criteria]){
+                                return 1
+                            }
+                            if(b[criteria] > a[criteria]){
+                                return -1
+                            }
+                            return 0
+                        })
+                    }else{
+                        this.classlist_copy.sort((a,b)=>{
+                            if(a[criteria] > b[criteria]){
+                                return -1
+                            }
+                        
+                            if(b[criteria] > a[criteria]){
+                                return 1
+                            }
+                        
+                            return 0
+                        })
+                    }
+                }else{
+                    this.classlist_copy = [...classlists]
+                }
+            }
+        },
+        search_N(query){
+                let val = this.sort_value.toLowerCase()
+
+                let temp = []
+                
+                if(val != "all" & query.trim() != ''){
+                    this.classlist_copy = this.classlists.filter(x => x[val].toLowerCase().includes(query.toLowerCase()))
+                    this.order_sort(this.sort_value)
+                }
+                if(query.trim() == ''){
+                    this.order_sort(this.sort_value)
+                }
+
+            },
+        watch:{
+            parsedInput(){
+                this.search()
+            }
+        },
+        data:{
+            sitename:"After School Classes",
+            cart:[],
+            order_value:"Ascending",
+            order_dict:{
+                "Ascending":{id:1,checked:true},
+                "Descending":{id:2,checked:false}
+            },
+            sort_value:"All",
+            sort_dict:{
+                "All":{id:1,checked:true},
+                "Subject":{id:2,checked:false},
+                "Location":{id:3,checked:false},
+                "Price":{id:4,checked:false}
+            },
+            searchInput:'',
+            classlists: [...classlists],
+            classlist_copy:[...classlists],
+            showClasslists:true,
+            U_pick:{
+                surname:'',
+                name:'',
+                tel:'',
+              
+            }
+            
+        }
+    })
+</script> 
       </html>
