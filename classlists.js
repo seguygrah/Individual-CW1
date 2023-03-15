@@ -1,11 +1,11 @@
 const classlists = [
 {
       "id": 1001,
-     "asses": "Math",
+     "asses": "Mathematics",
      "description": "Provides additional support and instruction to help children develop a strong foundation in math concepts, problem-solving, and analytical skills.",
      "location": "Dubai, Barsha 1",
      "price": 500,
-     "image": "img/math.jpg",
+     "image": "math.jpeg",
      "availableInventory": 5,
      
  },
@@ -15,7 +15,7 @@ const classlists = [
      "description": "Encourages creativity and imagination through painting, drawing, and crafting.",
      "location": "Dubai, Marina Towers",
      "price": 300,
-     "image": "img/Art.jpg",
+     "image": "Art.jpeg",
      "availableInventory": 5,
      
  },
@@ -25,7 +25,7 @@ const classlists = [
      "description": "Introduces children to music theory, instruments, and singing to improve their musical abilities.",
      "location": "Dubai, JBR",
      "price": 300,
-     "image": "img/music.jpg",
+     "image": "music.jpeg",
      "availableInventory": 5,
     
  },
@@ -35,7 +35,7 @@ const classlists = [
      "description": "Teaches kids the importance of team work while maintaining an active lifestyle",
      "location": "Dubai, JBR",
      "price": 300,
-     "image": "img/sport.png",
+     "image": "sport.png",
      "availableInventory": 5,
      
  },
@@ -45,7 +45,7 @@ const classlists = [
     "description": "Teaches kids the basics of coding and computer programming, preparing them for future technology-related careers.",
     "location": "Dubai, Marina",
     "price": 500,
-    "image": "img/coding.jpg",
+    "image": "coding.jpeg",
     "availableInventory": 5,
     
 },
@@ -55,7 +55,7 @@ const classlists = [
     "description": "Learn a new language such as Spanish, French, or Mandarin through interactive lessons and activities.",
     "location": "Dubai, JBR",
     "price": 350,
-    "image": "img/language.jpg",
+    "image": "language.jpeg",
     "availableInventory": 5,
     
 },
@@ -65,7 +65,7 @@ const classlists = [
     "description": "Build confidence and acting skills through improvisation, scene work, and theatre games.",
     "location": "Dubai, Marina",
     "price": 350,
-    "image": "img/drama.jpg",
+    "image": "drama.jpg",
     "availableInventory": 5,
     
 },
@@ -75,7 +75,7 @@ const classlists = [
     "description": "Explore the culinary world by learning how to prepare and cook delicious and healthy meals.",
     "location": "Dubai, Barsha 1",
     "price": 300,
-    "image": "img/cooking.jpg",
+    "image": "cooking.jpeg",
     "availableInventory": 5,
  
 },
@@ -85,7 +85,7 @@ const classlists = [
     "description": "Conduct experiments and explore scientific concepts through hands-on activities and projects.",
     "location": "Dubai, Barsha 1",
     "price": 400,
-    "image": "img/science.jpg",
+    "image": "science.jpeg",
     "availableInventory": 5,
    
 },
@@ -95,7 +95,7 @@ const classlists = [
     "description": "build and program robots using LEGO kits to explore engineering and technology concepts.",
     "location": "Dubai, JBR",
     "price": 500,
-    "image": "img/robotics.jpg",
+    "image": "robotics.jpeg",
     "availableInventory": 5,
    
 } 
