@@ -1,13 +1,13 @@
 const classlists = [
 {
       "id": 1001,
-     "title": "Mathematics",
+     "asses": "Math",
      "description": "Provides additional support and instruction to help children develop a strong foundation in math concepts, problem-solving, and analytical skills.",
      "location": "Dubai, Barsha 1",
      "price": 500,
      "image": "img/math.jpg",
      "availableInventory": 5,
-     "rating": 5,
+     
  },
  {
      "id": 1002,
@@ -17,7 +17,7 @@ const classlists = [
      "price": 300,
      "image": "img/Art.jpg",
      "availableInventory": 5,
-     "rating": 5,
+     
  },
  {
      "id": 1003,
@@ -27,7 +27,7 @@ const classlists = [
      "price": 300,
      "image": "img/music.jpg",
      "availableInventory": 5,
-     "rating": 5,
+    
  },
  {
      "id": 1004,
@@ -37,7 +37,7 @@ const classlists = [
      "price": 300,
      "image": "img/sport.png",
      "availableInventory": 5,
-     "rating": 4,
+     
  },
  {
     "id": 1005,
@@ -47,7 +47,7 @@ const classlists = [
     "price": 500,
     "image": "img/coding.jpg",
     "availableInventory": 5,
-    "rating": 5,
+    
 },
 {
     "id": 1006,
@@ -57,7 +57,7 @@ const classlists = [
     "price": 350,
     "image": "img/language.jpg",
     "availableInventory": 5,
-    "rating": 5,
+    
 },
 {
     "id": 1007,
@@ -67,7 +67,7 @@ const classlists = [
     "price": 350,
     "image": "img/drama.jpg",
     "availableInventory": 5,
-    "rating": 3,
+    
 },
 {
     "id": 1008,
@@ -77,7 +77,7 @@ const classlists = [
     "price": 300,
     "image": "img/cooking.jpg",
     "availableInventory": 5,
-    "rating": 4,
+ 
 },
 {
     "id": 1009,
@@ -87,7 +87,7 @@ const classlists = [
     "price": 400,
     "image": "img/science.jpg",
     "availableInventory": 5,
-    "rating": 5,
+   
 },
 {
     "id": 1010,
@@ -97,7 +97,7 @@ const classlists = [
     "price": 500,
     "image": "img/robotics.jpg",
     "availableInventory": 5,
-    "rating": 5,
+   
 } 
  ]
  

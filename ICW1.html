@@ -57,7 +57,7 @@
         </div>
     </div>
         </div>
-        <div id="details_page" v-else>
+        <div id="cart_page" v-else>
             <!--cart detils after order-->
             <div>
                 <h2>cart</h2>
@@ -71,7 +71,7 @@
                 </div>
             </div>
             <!--user details: name, surname and phone number-->
-            <div id="details">
+            <div id="cart">
                 <h2>Checkout</h2>
                 <button v-on:click="displayCheckout">Back</button>
                 <p>
@@ -93,7 +93,12 @@
                 <p> Surname: {{U_pick.surname}} </p>
                 <p> Name: {{U_pick.name}}</p>
                 <p> Phone Number: {{U_pick.tel}}</p>
-            </div>  
+            </div> 
+            
+            <div>
+                <h3>Complete</h3>
+                <button v-on:click="done">End</button>
+            </div>
             </div>
         </div>
       </main>
@@ -123,6 +128,9 @@
             displayCheckout(){
                 this.showClasslists = this.showClasslists ? false : true
             },
+            completecheckout(){
+               
+            },
             add_to_cart(lesson){
                 for (let i = 0; i < classlists.length; i++) {
                     const classlist= classlists[i]
@@ -131,7 +139,7 @@
                     }
                 }
                 
-                const id = `${lesson.title[0]}`+lesson.id+`${lesson.location[0]}`+Mathematics.ceil(Mathematics.random()*1000000)
+                const id = `${lesson.title[0]}`+lesson.id+`${lesson.location[0]}`+math.ceil(math.random()*1000000)
                 let data = {
                     "id": id,
                     "lesson":lesson,
@@ -213,7 +221,7 @@
         
         watch:{
             parsedInput(){
-                this.search()
+                this.search(classlists)
             }
         },
         data:{
