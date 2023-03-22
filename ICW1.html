@@ -6,81 +6,99 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>After School Classes</title>
         <script src= "https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
         <link rel="stylesheet" href="style.css">
     </head>
     
     <body>
+        
     <div id="app">
       <header>
         <h1> {{sitename}} </h1>
       </header>
       <main>
-        <div id="home" v-if="showClasslists">
-          
+        <section id="home" v-if="showClasslists">
+           
           <button v-if = "removeFromCart" id=button v-on:click= "displayCheckout" > 
-            {{cartItemCount}} Checkout
+            {{cartItemCount}} 
+            <i class="bx bx-cart"></i>
+            Checkout
           </button>
-          <button  disabled="disabled" v-else> {{cartItemCount}}
+          <button  disabled="disabled" v-else> {{cartItemCount}} Items
         </button>
+           
+        <section style="display: flex; flex-direction: row; width: 100%;">
 
-        <div>
-            <div id="order">
-                <div v-for="(value, key) in order_dict">
-                    <input type="radio" name="order" value="key" v-if="value.checked" checked v-on:click="order(key)">
-                    <input type="radio" name="order" value="key" v-else v-on:click="order(key)">
-                    <label for="order">{{key}}</label>
-            </div> 
+        <div id="filters" style="display:inline-flex; align-self: flex-start; width: 30%;">
+           
             <div id="sort">
                 <div v-for="(value, key) in sort_dict">
+                    
                     <input type="radio" name="sort" value="key" v-if="value.checked" checked v-on:click="sort(key)">
                     <input type="radio" name="sort" value="key" v-else v-on:click="sort(key)">
                     <label for="sort">{{key}}</label>
                 </div>
             </div>
-            <div>
+            <div id="order">
+                <div v-for="(value, key) in order_dict">
+                    <input type="radio" name="order" value="key" v-if="value.checked" checked v-on:click="order(key)">
+                    <input type="radio" name="order" value="key" v-else v-on:click="order(key)">
+                    <label for="order">{{key}}</label>
+                </div> 
+            </div>
+        </div>  
+            <section style="width: 100%;">
                 <div id="search">
-                    <input type="text" placeholder="search" v-if="search" v-model="searchInput" v-on>
+                    <input type="text" placeholder="search" v-if="search" v-model="searchInput">
                     <button v-on:click="search"><i class='bx bx-search'></i></button>
                 </div>
+
                 <div id="classlists">
-                    <div class="classlist" v-for="lesson in classlist_copy">
-                        <p>Lesson: {{lesson.title}}</p>
-                        <p>Description: {{lesson.description}}</p>
-                        <p>Location: {{lesson.location}}</p>
-                        <p>Price: {{lesson.price}}</p>
-                        <p>AvailableSpace: {{lesson.availableInventory}}</p>
-                        <button v-if="lesson.availableInventory > 0" v-on:click="add_to_cart(lesson)">Add To Cart</button>
+                    <div class="classlist" v-for="item in classlist_copy">
+                        <img v-bind:src="item.image" alt="" width="100%">
+                        <p>Title: {{item.title}}</p>
+                        <p>Description: {{item.description}}</p>
+                        <p>Location: {{item.location}}</p>
+                        <p>Price: {{item.price}}</p>
+                        <p>AvailableSpace: {{item.availablespace}}</p>
+                        <button v-if="item.availablespace > 0" v-on:click="add_to_cart(item)">Add To Cart</button>
                         <button v-else disabled>Add To Cart</button>
                     </div>
                 </div>
-            </div> 
-        </div>
-    </div>
-        </div>
-        <div id="cart_page" v-else>
-            <!--cart detils after order-->
+            </section> 
+        </section>
+    </section>
+        <section id="cart_page" v-else>
+            <!--cart details after order-->
             <div>
                 <h2>cart</h2>
                 <div id="classlists">
-                    <div class="classlist" v-for="lesson in cart">
-                        <p>Lesson: {{lesson.lesson.title}} </p>
-                        <p>Location: {{lesson.lesson.location}}</p>
-                        <p>Price: {{lesson.lesson.price}}</p>
-                        <button v-on:click="remove_from_cart(lesson)"> Remove from cart</button>
+                    <div class="classlist" v-for="item in cart">
+                        <p>Title: {{item.item.title}} </p>
+                        <p>Location: {{item.item.location}}</p>
+                        <p>Price: {{item.item.price}}</p>
+                        <button v-on:click="remove_from_cart(item)"> Remove from cart</button>
                     </div>
                 </div>
             </div>
             <!--user details: name, surname and phone number-->
-            <div id="cart">
+            <div id="Info">
                 <h2>Checkout</h2>
-                <button v-on:click="displayCheckout">Back</button>
+                <button v-on:click="displayCheckout">
+                    <i class='bx bx-left-arrow-alt'></i>  
+                    Back 
+                </button>
+                
                 <p>
                     <strong>Surname:</strong>
                     <input v-model.trim="U_pick.surname" type="text">
                 </p>
                 <p>
                     <strong>Name:</strong>
-                    <input v-model.trim="U_pick.name" type="text">
+                    <input v-model.trim="U_pick.Name" type="text">
                 </p>
                 <div>
                 <p>
@@ -91,30 +109,32 @@
             <div>
                 <h2>User Lesson Selection</h2>
                 <p> Surname: {{U_pick.surname}} </p>
-                <p> Name: {{U_pick.name}}</p>
+                <p> Name: {{U_pick.Name}}</p>
                 <p> Phone Number: {{U_pick.tel}}</p>
             </div> 
             
             <div>
                 <h3>Complete</h3>
-                <button v-on:click="done">End</button>
+                <!-- <button v-on:click="done">End</button> -->
             </div>
             </div>
-        </div>
+        </section>
       </main>
     </div>
     </body>
-      <script src="classlists.js"></script>
-<script>
+    <script src="classlists.js"></script>
+    <script>
     const webstore = new Vue({
         el:"#app",
         computed:{
+            
             cartItemCount(){
                 return this.cart.length || "Nothing Selected";
             },
             addToCart(){
                 return this.classlist.availableInventory > this.cart.length
             },
+            
             removeFromCart(){
                 return this.cart.length > 0
             },
@@ -131,37 +151,52 @@
             completecheckout(){
                
             },
-            add_to_cart(lesson){
+            add_to_cart(item)
+            {
                 for (let i = 0; i < classlists.length; i++) {
                     const classlist= classlists[i]
-                    if(lesson.id == classlist.id){
-                        lesson.spaces--
+                    if(item.id == classlist.id){
+                        item.availablespace--
                     }
                 }
                 
-                const id = `${lesson.title[0]}`+lesson.id+`${lesson.location[0]}`+math.ceil(math.random()*1000000)
+                const id = `${item.title[0]}`+item.id+`${item.location[0]}`+Math.ceil(Math.random()*1000000)
                 let data = {
                     "id": id,
-                    "lesson":lesson,
+                    "item":item,
                 }
 
                 this.cart.push(data)
             },
             remove_from_cart(cart_lesson){
                 for (let i = 0; i < classlists.length; i++) {
-                    const lesson = classlists[i]
-                    if(lesson.id == cart_lesson.lesson.id){
-                        lesson.spaces++
+                    const item = classlists[i]
+                    if(item.id == cart_lesson.item.id){
+                        item.availablespace++
                     }
                 }
                 for(let i = 0; i < this.cart.length; i++){
-                    const lesson = this.cart[i]
-                    if(cart_lesson.id == lesson.id){
+                    const item = this.cart[i]
+                    if(cart_lesson.id == item.id){
                         this.cart.splice(i,1)
                         break;
                     }
                 }
                 
+            },
+            search_N(query){
+                let val = this.sort_value.toLowerCase()
+
+                let temp = []
+                
+                if(val != "all" & query.trim() != ''){
+                    this.classlist_copy = this.classlists.filter(x => x[val].toLowerCase().includes(query.toLowerCase()))
+                    this.order_sort(this.sort_value)
+                }
+                if(query.trim() == ''){
+                    this.order_sort(this.sort_value)
+                }
+
             },
           
             order(value){
@@ -203,25 +238,12 @@
                     this.classlist_copy = [...classlists]
                 }
             },
-            search_N(query){
-                let val = this.sort_value.toLowerCase()
-
-                let temp = []
-                
-                if(val != "all" & query.trim() != ''){
-                    this.classlist_copy = this.classlists.filter(x => x[val].toLowerCase().includes(query.toLowerCase()))
-                    this.order_sort(this.sort_value)
-                }
-                if(query.trim() == ''){
-                    this.order_sort(this.sort_value)
-                }
-
-            },
+            
         },
         
         watch:{
             parsedInput(){
-                this.search(classlists)
+                this.search()
             }
         },
         data:{
@@ -235,7 +257,7 @@
             sort_value:"All",
             sort_dict:{
                 "All":{id:1,checked:true},
-                "Lesson":{id:2,checked:false},
+                "Title":{id:2,checked:false},
                 "Location":{id:3,checked:false},
                 "Price":{id:4,checked:false}
             },
@@ -243,12 +265,13 @@
             classlists: [...classlists],
             classlist_copy:[...classlists],
             showClasslists:true,
+            
             U_pick:{
                 surname:'',
-                name:'',
+                Name:'',
                 tel:'',
               
-            }
+            },
             
         }
     })
