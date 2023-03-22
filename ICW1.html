@@ -94,28 +94,29 @@
                 
                 <p>
                     <strong>Surname:</strong>
-                    <input v-model.trim="U_pick.surname" type="text">
+                    <input v-model.trim="surname" type="text">
                 </p>
                 <p>
                     <strong>Name:</strong>
-                    <input v-model.trim="U_pick.Name" type="text">
+                    <input v-model.trim="Name" type="text">
                 </p>
                 <div>
                 <p>
                     <strong>Phone Number:</strong>
-                    <input v-model.number="U_pick.tel" type="number">
+                    <input v-model="tel" type="number">
                 </p>
                 </div>
             <div>
                 <h2>User Lesson Selection</h2>
-                <p> Surname: {{U_pick.surname}} </p>
-                <p> Name: {{U_pick.Name}}</p>
-                <p> Phone Number: {{U_pick.tel}}</p>
+                <p> Surname: {{surname}} </p>
+                <p> Name: {{Name}}</p>
+                <p> Phone Number: {{tel}}</p>
             </div> 
             
             <div>
                 <h3>Complete</h3>
-                <!-- <button v-on:click="done">End</button> -->
+                <button disabled="disabled" v-if="!isValid">Submit</button>
+                <button v-else v-on:click="submitForm">End</button>
             </div>
             </div>
         </section>
@@ -128,7 +129,7 @@
         el:"#app",
         computed:{
             
-            cartItemCount(){
+            cartItemCount(){ 
                 return this.cart.length || "Nothing Selected";
             },
             addToCart(){
@@ -141,16 +142,33 @@
             search(){
                 this.search_N(this.searchInput)
                 return true
+            },
+            isValid()
+            {
+                return this.tel.trim() !== ''
             }
         },
         methods:{
+            validatePhone() 
+            {
+                const phoneRegex = /^[0-9]{10}$/ 
+                if (!phoneRegex.test(this.tel.trim())) 
+                { this.phoneError = 'Phone number must be 10 digits'} 
+                else { this.phoneError = '' }
+            }, 
+            
+            submitForm() 
+            {console.log('Hello'); 
+            alert('Form submitted successfully!');
+            },
             
             displayCheckout(){
                 this.showClasslists = this.showClasslists ? false : true
             },
-            completecheckout(){
-               
-            },
+            // completecheckout(){
+            
+            //    },
+        
             add_to_cart(item)
             {
                 for (let i = 0; i < classlists.length; i++) {
@@ -265,13 +283,16 @@
             classlists: [...classlists],
             classlist_copy:[...classlists],
             showClasslists:true,
+            Name:'',
+            surname:'',
+            tel:'',
             
-            U_pick:{
-                surname:'',
-                Name:'',
-                tel:'',
+            // U_pick:{
+            //     surname:'',
+            //     Name:'',
+            //     tel:'',
               
-            },
+            // },
             
         }
     })
