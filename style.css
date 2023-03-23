@@ -12,7 +12,7 @@ button{
     cursor: pointer;
 }
 button:hover{
-    background-color: salmon;
+    background-color: rgb(15, 176, 101);
     color: white;
 }
 input{
@@ -24,16 +24,16 @@ input[type="button"]{
     cursor: pointer;
 }
 input[type="button"]:hover{
-    background-color: salmon;
+    background-color: rgb(13, 137, 44);
     color: white;
 }
 input[type=text]{
     
-    border: 1px dashed #212142;
+    border: 1px dashed #f8ff1e;
     outline: none;
 }
 input[type=text]:focus{
-    border: 1px dashed salmon;
+    border: 1px dashed rgb(66, 171, 44);
 }
 #app{
     padding: 1rem;
@@ -75,7 +75,7 @@ input[type=text]:focus{
 }
 .classlist{
     padding: 1.5rem;
-    box-shadow: 1px 3px 3px #21214225;
+    box-shadow: 1px 3px 3px #074d03;
 }
 .classlist *{
     margin: 0.25rem 0;
